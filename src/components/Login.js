@@ -1,30 +1,25 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Button,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {View, TextInput, StyleSheet, Button, Text} from 'react-native';
 
 const Login = ({signIn}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validateFields = () => {
+    setLoading(true);
     if (!username) {
       setUsernameError(true);
     }
     if (!password) {
       setPasswordError(true);
     }
+    setLoading(false);
     if (username && password) {
-      setUsernameError(false);
-      setPasswordError(false);
       signIn({username, password});
+      setLoading(false);
     }
   };
 
@@ -56,7 +51,10 @@ const Login = ({signIn}) => {
         <Text style={styles.error}>This field is required*</Text>
       )}
       <View style={styles.button}>
-        <Button title="Sign in" onPress={validateFields} />
+        <Button
+          title={loading ? 'Loading...' : 'Sign in'}
+          onPress={validateFields}
+        />
       </View>
     </View>
   );
