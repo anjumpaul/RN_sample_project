@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, Button, Text} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 const Login = ({signIn}) => {
   const [username, setUsername] = useState('');
@@ -49,7 +56,7 @@ const Login = ({signIn}) => {
         <Text style={styles.error}>This field is required*</Text>
       )}
       <View style={styles.button}>
-        <Button title="Sign in" onPress={() => validateFields()} />
+        <Button title="Sign in" onPress={validateFields} />
       </View>
     </View>
   );
